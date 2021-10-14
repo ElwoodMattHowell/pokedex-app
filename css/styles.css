@@ -1,0 +1,87 @@
+body {
+  text-align: center;
+  overflow: hidden;
+  height: 100vh;
+  background-color: #2a75bb;
+  background-image: linear-gradient(#2a75bb, #3c5aa6);
+}
+
+h1 {
+  line-height: 100px;
+}
+
+.title-container {
+  height: 100px;
+  display: flex;
+  justify-content: center;
+}
+
+.picture {
+  height: 100px;
+  width: auto;
+}
+
+.pokemon-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.poke-button {
+  border: none;
+  font-size: 30px;
+  background-color: #e4000f;
+  color: black;
+  text-decoration: none;
+  padding: 10px;
+  border-radius: 3px;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.3);
+  margin-top: 10px;
+  width: 230px;
+  transition-duration: 0.2s;
+  transition-property: opacity;
+}
+
+.poke-button:hover,
+.poke-button:focus {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+/*Pokemon running animation*/
+.pokemon-running {
+  height: 100px;
+  width: auto;
+  display: block;
+  position: fixed;
+  animation-name: pokeMonAnimation;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+  animation-duration: 3s;
+}
+
+@keyframes pokeMonAnimation {
+  from {
+      left: 1300px;
+      top: 550px;
+  }
+  to {
+      left: -100px;
+      top: 550px;
+  }
+}
+
+/*pokedex animation*/
+.title-animation {
+  animation: shake .5s 6 ease;
+}
+@keyframes shake {
+  0%, 50%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-20deg); }
+  75% {transform: rotate(20deg);}
+}
+
+@media all and (max-width: 500px) {
+  .pokemon-running {
+    visibility: hidden;
+  }
+}
