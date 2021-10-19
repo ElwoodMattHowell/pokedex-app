@@ -1,6 +1,7 @@
 body {
   text-align: center;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: scroll;
   height: 100vh;
   background-color: #2a75bb;
   background-image: linear-gradient(#2a75bb, #3c5aa6);
