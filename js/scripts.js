@@ -1,42 +1,63 @@
-
 let pokemonRepository = (function () {
 
   let pokemonList = [];
-  //   {name: 'Bulbasaur', height: 0.7, types:['Grass','Poison']},
-  //   {name: 'Charizard', height: 1.7, types:['Fire','Flying']},
-  //   {name: 'Blastoise', height: 0.6, types:['Water']},
-  //   {name: 'Arbok', height: 3.5, types:['Poison']},
-  //   {name: 'Nidoking', height: 1.4, types:['Ground','Poison']},
-  // ];
-  let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=20';
+
+  const apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=20',
+        modalContainer = document.querySelector('#modal-container');
 
   function add(pokemon) {
-    if (
-      typeof pokemon === "object" &&
-      "name" in pokemon
-    ){
       pokemonList.push(pokemon);
-    } else {
-       console.log('Pokemon entry is not in correct form.');
-     }
-
   }
 
   function getAll() {
     return pokemonList;
   }
 
-  function pokeSearch(pokeName) {
-    return pokemonList.filter(function(pokemon) {
-      return pokemon.name === pokeName;
-    });
-  }
+  // function pokeSearch(pokeName) {
+  //   return pokemonList.filter(function(pokemon) {
+  //     return pokemon.name === pokeName;
+  //   });
+  // }
 
   function showDetails(pokemon) {
-    loadDetails(pokemon).then(function(){
-      console.log(pokemon);
-    });
-  }
+      modalContainer.innerHTML = '';
+      let modal = document.createElement('div');
+      modal.classList.add('modal');
+
+      let nameElement = document.createElement('h4');
+      let heightElement = document.createElement('p');
+      let pictureElement = document.createElement('img');
+
+      loadDetails(pokemon).then(function(){
+        nameElement.innerText = pokemon.name;
+        heightElement.innerText = `Height: ${pokemon.height}`;
+        pictureElement.src = pokemon.imageUrl;
+      });
+
+      let closeButton = document.createElement('button');
+      closeButton.classList.add('modal-close');
+      closeButton.innerText = 'X';
+      closeButton.addEventListener('pointerdown', hideModal);
+
+      modalContainer.addEventListener('pointerdown', (e) => {
+        let target = e.target;
+        if (target === modalContainer) {
+          hideModal();
+        }
+      })
+
+      modalContainer.appendChild(modal);
+      modal.appendChild(closeButton);
+      modal.appendChild(nameElement);
+      modal.appendChild(heightElement);
+      modal.appendChild(pictureElement);
+
+      modalContainer.classList.add('is-visible');
+    }
+
+    function hideModal() {
+      modalContainer.classList.remove('is-visible');
+    }
 
   function addListItem(pokemon) {
     let pokeList = document.querySelector('.pokemon-list');
@@ -50,7 +71,7 @@ let pokemonRepository = (function () {
   }
 
   function addListener(button, pokemon) {
-    button.addEventListener('click', function() {
+    button.addEventListener('pointerdown', function() {
       showDetails(pokemon)
   });
 }
@@ -84,10 +105,16 @@ let pokemonRepository = (function () {
     })
   }
 
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modalContainer.classList.contains('is-visible')) {
+      hideModal();
+    }
+  })
+
   return {
     add: add,
     getAll: getAll,
-    pokeSearch: pokeSearch,
+    // pokeSearch: pokeSearch,
     addListItem: addListItem,
     loadList: loadList,
     loadDetails: loadDetails
@@ -99,15 +126,3 @@ pokemonRepository.loadList().then(function() {
     pokemonRepository.addListItem(pokemon);
   });
 });
-// let newPokemon = {name: 'Raichu', height: .8, types:['Electric']};
-// pokemonRepository.add(newPokemon);
-
-// let inIndex = pokemonRepository.pokeSearch('Arbok');
-// if(inIndex.length != 0) {
-//   document.write(`<p> ${inIndex[0].name} (height: ${inIndex[0].height}) (types: ${inIndex[0].types})</p>`);
-// }
-// else {
-//   document.write('Pokemon not found.')
-// }
-
-//pokemonRepository.getAll().forEach(pokemonRepository.addListItem);
