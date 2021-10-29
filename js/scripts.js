@@ -13,12 +13,6 @@ let pokemonRepository = (function () {
     return pokemonList;
   }
 
-  // function pokeSearch(pokeName) {
-  //   return pokemonList.filter(function(pokemon) {
-  //     return pokemon.name === pokeName;
-  //   });
-  // }
-
   function showDetails(pokemon) {
       modalContainer.innerHTML = '';
       let modal = document.createElement('div');
