@@ -3,7 +3,7 @@ let pokemonRepository = (function () {
   let pokemonList = [];
 
   const apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=20',
-        modalContainer = document.querySelector('#modal-container');
+        modalContainer = $('#modal-container');
 
   function add(pokemon) {
       pokemonList.push(pokemon);
@@ -14,58 +14,58 @@ let pokemonRepository = (function () {
   }
 
   function showDetails(pokemon) {
-      modalContainer.innerHTML = '';
-      let modal = document.createElement('div');
-      modal.classList.add('modal');
+      modalContainer.html('');
+      let modal = $('<div></div>');
+      modal.addClass('modal');
 
-      let nameElement = document.createElement('h4');
-      let heightElement = document.createElement('p');
-      let pictureElement = document.createElement('img');
+      let nameElement = $('<h4></h4>');
+      let heightElement = $('<p></p>');
+      let pictureElement = $('<img>');
 
       loadDetails(pokemon).then(function(){
-        nameElement.innerText = pokemon.name;
-        heightElement.innerText = `Height: ${pokemon.height}`;
-        pictureElement.src = pokemon.imageUrl;
+        nameElement.html(pokemon.name);
+        heightElement.html(`Height: ${pokemon.height}`);
+        pictureElement.attr('src', pokemon.imageUrl);
       });
 
-      let closeButton = document.createElement('button');
-      closeButton.classList.add('modal-close');
-      closeButton.innerText = 'X';
-      closeButton.addEventListener('pointerdown', hideModal);
+      let closeButton = $('<button></button>');
+      closeButton.addClass('modal-close');
+      closeButton.text('X');
+      closeButton.on('pointerdown', hideModal);
 
-      modalContainer.addEventListener('pointerdown', (e) => {
+      modalContainer.on('pointerdown', (e) => {
         let target = e.target;
         if (target === modalContainer) {
           hideModal();
         }
       })
 
-      modalContainer.appendChild(modal);
-      modal.appendChild(closeButton);
-      modal.appendChild(nameElement);
-      modal.appendChild(heightElement);
-      modal.appendChild(pictureElement);
+      modalContainer.append(modal);
+      modal.append(closeButton);
+      modal.append(nameElement);
+      modal.append(heightElement);
+      modal.append(pictureElement);
 
-      modalContainer.classList.add('is-visible');
+      modalContainer.addClass('is-visible');
     }
 
     function hideModal() {
-      modalContainer.classList.remove('is-visible');
+      modalContainer.removeClass('is-visible');
     }
 
   function addListItem(pokemon) {
-    let pokeList = document.querySelector('.pokemon-list');
-    let listItem = document.createElement('li');
-    let button = document.createElement('button');
-    button.innerText = pokemon.name;
-    button.classList.add('poke-button');
-    listItem.appendChild(button);
-    pokeList.appendChild(listItem);
+    let pokeList = $('.pokemon-list');
+    let listItem = $('<li></li>');
+    let button = $('<button></button>');
+    button.text(pokemon.name);
+    button.addClass('poke-button');
+    listItem.append(button);
+    pokeList.append(listItem);
     addListener(button, pokemon);
   }
 
   function addListener(button, pokemon) {
-    button.addEventListener('pointerdown', function() {
+    button.on('pointerdown', function() {
       showDetails(pokemon)
   });
 }
@@ -88,6 +88,7 @@ let pokemonRepository = (function () {
 
   function loadDetails(item) {
     let url = item.detailsUrl;
+    // console.log(url);
     return fetch(url).then(function (response) {
       return response.json();
     }).then(function(details){
@@ -99,8 +100,8 @@ let pokemonRepository = (function () {
     })
   }
 
-  window.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modalContainer.classList.contains('is-visible')) {
+  $('window').keydown('keydown', (e) => {
+    if (e.key === 'Escape' && modalContainer.hasClass('is-visible')) {
       hideModal();
     }
   })
@@ -108,7 +109,6 @@ let pokemonRepository = (function () {
   return {
     add: add,
     getAll: getAll,
-    // pokeSearch: pokeSearch,
     addListItem: addListItem,
     loadList: loadList,
     loadDetails: loadDetails
