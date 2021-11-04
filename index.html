@@ -8,33 +8,47 @@
     <link rel="stylesheet" type="text/css" href="css/styles.css"/>
   </head>
   <body>
-    <div class="title-container">
-      <img src="img/pokemon-image.png" alt="pikachu picture" class="picture">
-      <h1 class="title-animation">Pok&eacute;dex</h1>
-    </div>
-    <!-- <button
-      type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-    </button> -->
+    <header class="container-fluid">
+      <nav class="navbar navbar-light fixed-top" style="background-color: #e4000f">
+        <ul class="list-group list-group-horizontal">
+          <li class="nav-item active">
+            <img src="img/pokemon-image.png" alt="pikachu picture" class="d-inline-block" width="50" height="50">
+          </li>
+          <li class="nav-item">
+            <h3 class="title-animation">Pok&eacute;dex</h3>
+          </li>
+        </ul>
+        <form class="form-inline">
+          <input class="form-control mr-sm-2" type="search" placeholder="Enter Pok&eacute;mon" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+      </nav>
+    </header>
 
-<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title"></h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+    <div class="container-fluid">
+      <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title"></h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              ...
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="modal-body">
-        ...
-      </div>
     </div>
-  </div>
-</div>
 
-    <ul class="pokemon-list list-group"></ul>
-
-    <img src="img/image.png" alt="pokemon running" class="pokemon-running">
+    <main class="container-fluid">
+      <div class="d-flex justify-content-center">
+        <img src="img/image.png" alt="pokemon running" class="pokemon-running">
+        <ul class="pokemon-list list-group"></ul>
+      </div>
+    </main>
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"
     integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
@@ -46,7 +60,6 @@
 
     <script src="js/promise-polyfill.js"></script>
     <script src="js/fetch-polyfill.js"></script>
-    <!-- <script src="pep.dist.js"></script> -->
     <script src="js/scripts.js"></script>
   </body>
 </html>
