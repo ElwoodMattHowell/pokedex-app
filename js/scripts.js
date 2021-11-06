@@ -71,27 +71,6 @@ let pokemonRepository = (function () {
       $('input').val('');
     }
 
-
-    // pokemonList.forEach(poke => console.log(poke.name));
-    // let onList = true
-    // pokemonList(function (pokemon) {
-    //   // if (pokemon.name == pokename) {
-    //   showDetails(pokemon)
-      // onList = true
-    // }
-  // });
-    }
-  //   else {
-  //     onList = false;
-  //   }
-  // });
-  //   if (!onList) {
-  //       alert('This Pok&eacute;mon is not on my list.  Try Again, or select from the list.')
-  //       $('input').val('');
-
-
-
-
   function loadList() {
     return fetch(apiUrl).then(function (response) {
       return response.json();
