@@ -31,6 +31,8 @@ let pokemonRepository = (function () {
       modalTitle.append(nameElement);
       modalBody.append(pictureElement);
       modalBody.append(heightElement);
+
+      $('input').val('');
     }
 
   function addListItem(pokemon) {
@@ -52,6 +54,44 @@ let pokemonRepository = (function () {
   });
 }
 
+  function addSearch() {
+    let searchButton = $('#search-button');
+    searchButton.on('pointerdown', function() {
+      search($('input').val());
+  });
+}
+
+  function search(pokename) {
+    let result = pokemonList.find( ({ name }) => name === pokename.toLowerCase() );
+    if (result) {
+      showDetails(result);
+    }
+    else {
+      alert(`${pokename} is not on my list.  Try again.`)
+      $('input').val('');
+    }
+
+
+    // pokemonList.forEach(poke => console.log(poke.name));
+    // let onList = true
+    // pokemonList(function (pokemon) {
+    //   // if (pokemon.name == pokename) {
+    //   showDetails(pokemon)
+      // onList = true
+    // }
+  // });
+    }
+  //   else {
+  //     onList = false;
+  //   }
+  // });
+  //   if (!onList) {
+  //       alert('This Pok&eacute;mon is not on my list.  Try Again, or select from the list.')
+  //       $('input').val('');
+
+
+
+
   function loadList() {
     return fetch(apiUrl).then(function (response) {
       return response.json();
@@ -70,7 +110,6 @@ let pokemonRepository = (function () {
 
   function loadDetails(item) {
     let url = item.detailsUrl;
-    // console.log(url);
     return fetch(url).then(function (response) {
       return response.json();
     }).then(function(details){
@@ -87,7 +126,8 @@ let pokemonRepository = (function () {
     getAll: getAll,
     addListItem: addListItem,
     loadList: loadList,
-    loadDetails: loadDetails
+    loadDetails: loadDetails,
+    addSearch: addSearch
   };
 })();
 
@@ -96,3 +136,5 @@ pokemonRepository.loadList().then(function() {
     pokemonRepository.addListItem(pokemon);
   });
 });
+
+pokemonRepository.addSearch();
