@@ -70,6 +70,7 @@ let pokemonRepository = (function () {
       alert(`${pokename} is not on my list.  Try again.`)
       $('input').val('');
     }
+}
 
   function loadList() {
     return fetch(apiUrl).then(function (response) {
