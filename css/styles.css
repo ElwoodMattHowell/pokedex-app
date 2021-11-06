@@ -6,7 +6,7 @@ html, body {
   text-align: center;
 }
 
-h4 {
+h2 {
   text-transform: uppercase;
 }
 
@@ -70,8 +70,14 @@ main {
   75% {transform: rotate(20deg);}
 }
 
-@media all and (max-width: 500px) {
-  .pokemon-running {
-    visibility: hidden;
+@media all and (max-width: 575px) {
+  main{
+    padding-top: 120px;
+  }
+}
+
+@media all and (max-width: 420px) {
+  main{
+    padding-top: 180px;
   }
 }

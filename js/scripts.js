@@ -25,7 +25,7 @@ let pokemonRepository = (function () {
       loadDetails(pokemon).then(function(){
         nameElement.html(pokemon.name);
         heightElement.html(`Height: ${pokemon.height}`);
-        pictureElement.attr('src', pokemon.imageUrl);
+        pictureElement.attr({'src': pokemon.imageUrl, alt: `picture of ${pokemon.name}`});
       });
 
       modalTitle.append(nameElement);
