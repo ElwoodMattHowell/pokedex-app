@@ -71,13 +71,13 @@ main {
 }
 
 @media all and (max-width: 575px) {
-  main{
+  main {
     padding-top: 120px;
   }
 }
 
-@media all and (max-width: 420px) {
-  main{
+@media all and (max-width: 520px) {
+  main {
     padding-top: 180px;
   }
 }
