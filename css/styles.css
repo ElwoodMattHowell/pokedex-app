@@ -14,31 +14,43 @@ main {
   padding-top: 90px;
 }
 
-.list {
+.navPad {
+  padding-top: 180px;
+}
+
+.poke-logo {
   list-style-type: none;
   padding: 0;
 }
 
+.list-group-item {
+    background-color: transparent;
+    border: none;
+}
+
 .poke-button {
-  font-size: 30px;
+  width: 200px;
   background-color: #e4000f;
   color: black;
-  border-radius: 3px;
-  width: 230px;
+  border-radius: 10px;
   text-transform: uppercase;
 }
 
 .poke-button:hover,
 .poke-button:focus {
+  transform: scale(1.05, 1.05);
   cursor: pointer;
-  opacity: 0.8;
 }
 
 .modal-content {
   background-color: #ffcb05;
 }
 
-.pokemon-running {
+.modal-image {
+  height: 300px;
+  width: 300px;
+}
+/* .pokemon-running {
   height: 100px;
   width: auto;
   display: block;
@@ -47,9 +59,9 @@ main {
   animation-timing-function: linear;
   animation-fill-mode: forwards;
   animation-duration: 3s;
-}
+} */
 
-@keyframes pokeMonAnimation {
+/* @keyframes pokeMonAnimation {
   from {
       left: 1300px;
       top: 550px;
@@ -58,7 +70,7 @@ main {
       left: -100px;
       top: 550px;
   }
-}
+} */
 
 .title-animation {
   animation: shake .5s 6 ease;
@@ -70,11 +82,11 @@ main {
   75% {transform: rotate(20deg);}
 }
 
-@media all and (max-width: 575px) {
+/* @media all and (max-width: 575px) {
   main {
     padding-top: 120px;
   }
-}
+} */
 
 @media all and (max-width: 520px) {
   main {

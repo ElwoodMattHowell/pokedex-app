@@ -3,31 +3,41 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="img/favicon.ico">
     <title>Pokedex App</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="css/styles.css"/>
   </head>
   <body>
-    <header class="container-fluid">
-      <nav class="navbar navbar-light fixed-top" style="background-color: #e4000f">
-        <ul class="list list-group list-group-horizontal">
-          <li class="nav-item active">
-            <img src="img/pokemon-image.png" alt="pikachu picture" width="60" height="60">
-          </li>
-          <li class="nav-item">
-            <h1 class="title-animation">Pok&eacute;dex</h1>
-          </li>
-        </ul>
-        <form class="form-inline">
-          <input class="form-control mr-sm-2" type="search" placeholder="Enter Pok&eacute;mon" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" data-toggle="modal" data-target="#modal" type="button" id="search-button">Search</button>
-        </form>
+    <header>
+      <nav class="navbar navbar-light navbar-expand-sm fixed-top" style="background-color: #e4000f">
+        <div class="container-fluid">
+          <ul class="poke-logo list-group list-group-horizontal">
+            <li class="nav-item active">
+              <img src="img/pokedex.svg" alt="pokedex logo" width="200" class=title-animation>
+            </li>
+          </ul>
+          <button class="navbar-toggler hamburger-button" type="button" data-toggle="collapse" data-target="#navbarTogglerData" aria-controls="navbarTogglerData" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse justify-content-end" id="navbarTogglerData">
+            <form class="form-inline">
+              <input class="form-control mr-sm-2" id="search-bar" type="search" placeholder="Search Pokemon" aria-label="Search">
+              <button class="btn btn-outline-success my-2 my-sm-0" data-toggle="modal" data-target="#modal" type="button" id="search-button">Search</button>
+            </form>
+          </div>
+        </div>
       </nav>
     </header>
 
-    <div class="container-fluid">
+    <main>
+      <div class="container list-container align-items-center">
+  				<ul class="row list-unstyled" id="poke-list"></ul>
+  			</div>
+
+      <!--Modal-->
       <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-md" role="document">
           <div class="modal-content">
             <div class="modal-header">
               <h2 class="modal-title"></h2>
@@ -35,19 +45,18 @@
                 <span aria-label="Close">&times;</span>
               </button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body text-center">
               ...
             </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <main class="container-fluid">
-      <div class="d-flex justify-content-center">
-        <img src="img/image.png" alt="pokemon running" class="pokemon-running">
-        <ul class="list-group list" id="poke-list"></ul>
-      </div>
+
+
+      <!-- <div class="d-flex justify-content-center"> -->
+        <!-- <img src="img/image.png" alt="pokemon running" class="pokemon-running"> -->
+      <!-- </div> -->
     </main>
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"
