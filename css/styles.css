@@ -1,12 +1,21 @@
+:root {
+  --darkBlueBackground: #3c5aa6;
+  --lightBlueBackground: #2a75bb;
+  --navBarBackground: #e4000f;
+  --pokeBackground: #ffcb05;
+  --pokeText: black;
+}
+
 html, body {
   overflow-x: hidden;
   overflow-y: scroll;
   height: 100vh;
-  background-image: linear-gradient(#2a75bb, #3c5aa6);
+  background-color: var(--darkBlueBackground);
+  background-image: linear-gradient(var(--lightBlueBackground), var(--darkBlueBackground));
   text-align: center;
 }
 
-h2 {
+h1 {
   text-transform: uppercase;
 }
 
@@ -14,8 +23,13 @@ main {
   padding-top: 90px;
 }
 
-.navPad {
-  padding-top: 180px;
+#navbar {
+  background-color: var(--navBarBackground);
+}
+
+#search-button {
+  color: white;
+  background-color: #3c5aa6;
 }
 
 .poke-logo {
@@ -30,8 +44,8 @@ main {
 
 .poke-button {
   width: 200px;
-  background-color: #e4000f;
-  color: black;
+  background-color: var(--pokeBackground);
+  color: var(--pokeText);
   border-radius: 10px;
   text-transform: uppercase;
 }
@@ -43,34 +57,13 @@ main {
 }
 
 .modal-content {
-  background-color: #ffcb05;
+  background-color: var(--pokeBackground);
 }
 
 .modal-image {
   height: 300px;
   width: 300px;
 }
-/* .pokemon-running {
-  height: 100px;
-  width: auto;
-  display: block;
-  position: fixed;
-  animation-name: pokeMonAnimation;
-  animation-timing-function: linear;
-  animation-fill-mode: forwards;
-  animation-duration: 3s;
-} */
-
-/* @keyframes pokeMonAnimation {
-  from {
-      left: 1300px;
-      top: 550px;
-  }
-  to {
-      left: -100px;
-      top: 550px;
-  }
-} */
 
 .title-animation {
   animation: shake .5s 6 ease;
@@ -81,12 +74,6 @@ main {
   25% { transform: rotate(-20deg); }
   75% {transform: rotate(20deg);}
 }
-
-/* @media all and (max-width: 575px) {
-  main {
-    padding-top: 120px;
-  }
-} */
 
 @media all and (max-width: 520px) {
   main {

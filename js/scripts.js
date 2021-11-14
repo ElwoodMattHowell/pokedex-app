@@ -17,7 +17,7 @@ let pokemonRepository = (function () {
     modalTitle.empty();
     modalBody.empty();
 
-    let nameElement = $('<h4></h4>');
+    let nameElement = $('<h2></h2>');
     let heightElement = $('<p></p>');
     let typesElement = $('<p></p>');
     let pictureElement = $('<img>');
@@ -51,19 +51,24 @@ let pokemonRepository = (function () {
     let pokeList = $('#poke-list');
     let listItem = $('<li></li>');
     let button = $('<button></button>');
+    let pokeImage =$('<img/>');
+    let pokeName =$('<p></p>');
     button.attr({
       type: 'button',
       'data-toggle': 'modal',
       'data-target': '#modal',
     });
     loadDetails(pokemon).then(function () {
-      button.html(`
-              <img src='${pokemon.imageUrl}'>
-              <p>${pokemon.name}</p>
-              `)
+      pokeImage.attr({
+        src: `${pokemon.imageUrl}`,
+        alt: `picture of ${pokemon.name}`,
+      });
+      pokeName.text(pokemon.name);
     });
     button.addClass('poke-button btn btn-lg');
     listItem.addClass('list-group-item col-xl-3 col-lg-4 col-md-5 col-sm-6 col-xs-10 align-items-center');
+    button.append(pokeImage);
+    button.append(pokeName);
     listItem.append(button);
     pokeList.append(listItem);
     addListener(button, pokemon);
@@ -72,13 +77,6 @@ let pokemonRepository = (function () {
   function addListener(button, pokemon) {
     button.on('pointerdown', function () {
       showModal(pokemon);
-    });
-  }
-
-  function addSearch() {
-    let searchButton = $('#search-button');
-    searchButton.on('pointerdown', function () {
-      search($('input').val());
     });
   }
 
@@ -131,21 +129,17 @@ let pokemonRepository = (function () {
       });
   }
 
+  let searchButton = $('#search-button');
+  searchButton.on('pointerdown', function () {
+    search($('input').val());
+  });
 
-    let navButton = $('#hamburger-button');
-    let main = $('main');
-    navButton.on('pointerdown', function () {
-      main.addClass('navPad');
-    });
-
-  
   return {
     add: add,
     getAll: getAll,
     addListItem: addListItem,
     loadList: loadList,
     loadDetails: loadDetails,
-    addSearch: addSearch,
   };
 })();
 
@@ -154,5 +148,3 @@ pokemonRepository.loadList().then(function () {
     pokemonRepository.addListItem(pokemon);
   });
 });
-
-pokemonRepository.addSearch();
