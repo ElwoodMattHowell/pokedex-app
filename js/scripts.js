@@ -1,31 +1,34 @@
+
 let pokemonRepository = ( function() {
   let pokemonList = [];
 
   const apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
 
+  // takes pokemon object and adds it to pokemonList
   function add( pokemon ) {
     pokemonList.push( pokemon );
   }
 
+  // returns pokemon list
   function getAll() {
     return pokemonList;
   }
 
+  // loads pokemon content to modal
   function showModal( pokemon ) {
     let modalBody = $( '.modal-body' );
     let modalTitle = $( '.modal-title' );
     modalTitle.empty();
     modalBody.empty();
 
-    let nameElement = $( '<h2></h2>' );
     let heightElement = $( '<p></p>' );
     let typesElement = $( '<p></p>' );
     let pictureElement = $( '<img>' );
     let pokemonTypes = [];
 
     loadDetails( pokemon ).then( function() {
-      nameElement.html( pokemon.name );
-      heightElement.html( `<p>Height: ${pokemon.height}mm</p>` );
+      modalTitle.text(pokemon.name);
+      heightElement.text( `Height: ${pokemon.height}mm` );
       pictureElement.attr( {
         src: pokemon.artImageUrl,
         alt: `picture of ${pokemon.name}`
@@ -33,13 +36,13 @@ let pokemonRepository = ( function() {
       pictureElement.addClass( 'modal-image' );
     } );
 
+    // iterates through 'types' array and stringifys the values
     Object.keys( pokemon.types ).forEach( key => {
       pokemonTypes.push( ' ' + pokemon.types[ key ].type.name );
     } );
 
 		typesElement.text( `Type(s):  ${pokemonTypes}` );
 
-    modalTitle.append( nameElement );
     modalBody.append( pictureElement );
     modalBody.append( heightElement );
     modalBody.append( typesElement );
@@ -47,17 +50,20 @@ let pokemonRepository = ( function() {
     $( 'input' ).val( '' );
   }
 
+  // builds and displays list of pokemon
   function addListItem( pokemon ) {
     let pokeList = $( '#poke-list' );
     let listItem = $( '<li></li>' );
     let button = $( '<button></button>' );
     let pokeImage = $( '<img/>' );
     let pokeName = $( '<p></p>' );
+
     button.attr( {
       type: 'button',
       'data-toggle': 'modal',
       'data-target': '#modal'
     } );
+
     loadDetails( pokemon ).then( function() {
       pokeImage.attr( {
         src: `${pokemon.imageUrl}`,
@@ -65,22 +71,27 @@ let pokemonRepository = ( function() {
       } );
       pokeName.text( pokemon.name );
     } );
+
     button.addClass( 'poke-button btn btn-lg' );
     listItem.addClass( 'list-group-item' );
     listItem.addClass( 'col-xl-3 col-lg-4 col-md-5 col-sm-6 col-xs-10 align-items-center' );
+
     button.append( pokeImage );
     button.append( pokeName );
     listItem.append( button );
     pokeList.append( listItem );
+
     addListener( button, pokemon );
   }
 
+  // prompts modal to show when button is clicked
   function addListener( button, pokemon ) {
     button.on( 'pointerdown', function() {
       showModal( pokemon );
     } );
   }
 
+  // searches for pokemon entered in search bar
   function search( pokename ) {
     let result = pokemonList.find(
       ( { name } ) => name === pokename.toLowerCase()
@@ -93,6 +104,10 @@ let pokemonRepository = ( function() {
     }
   }
 
+  /**
+    * Fetches the full list of Pokemon from the pokeAPI, then creates a pokemon object
+    *  for each one and calls add on it.
+    */
   function loadList() {
     return fetch( apiUrl )
       .then( function( response ) {
@@ -112,7 +127,7 @@ let pokemonRepository = ( function() {
         console.error( e );
       } );
   }
-
+  //load details of each pokemon
   function loadDetails( item ) {
     let url = item.detailsUrl;
     return fetch( url )
@@ -130,6 +145,7 @@ let pokemonRepository = ( function() {
       } );
   }
 
+  //calls search function when search button is clicked
   let searchButton = $( '#search-button' );
   searchButton.on( 'pointerdown', function() {
     search( $( 'input' ).val() );
