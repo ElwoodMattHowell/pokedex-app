@@ -7,7 +7,7 @@
     "extends": "eslint:recommended",
     "extends": "jquery",
     "parserOptions": {
-        "ecmaVersion": 13,
+        "ecmaVersion": 2020,
         "sourceType": "module"
     },
     "globals": {

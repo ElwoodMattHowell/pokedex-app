@@ -27,7 +27,7 @@ let pokemonRepository = ( function() {
     let pokemonTypes = [];
 
     loadDetails( pokemon ).then( function() {
-      modalTitle.text(pokemon.name);
+      modalTitle.text( pokemon.name );
       heightElement.text( `Height: ${pokemon.height}mm` );
       pictureElement.attr( {
         src: pokemon.artImageUrl,
@@ -127,6 +127,7 @@ let pokemonRepository = ( function() {
         console.error( e );
       } );
   }
+
   //load details of each pokemon
   function loadDetails( item ) {
     let url = item.detailsUrl;
