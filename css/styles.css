@@ -29,6 +29,10 @@ main {
   background-color: var(--navBarBackground);
 }
 
+.is-hidden {
+  display: none;
+}
+
 #search-button {
   color: var(--altPokeText);
   background-color: #3c5aa6;
