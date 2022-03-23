@@ -14,6 +14,29 @@ let pokemonRepository = (function () {
     return pokemonList;
   }
 
+  function filterSearch(name) {
+    if (!name) {
+      return pokemonList
+    } else {
+      let newPokeList = pokemonList.filter(pokemon => pokemon.name.toLowerCase().includes(name.toLowerCase()));
+      // console.log(pokemonList[0].name.split(""));
+      // console.log(newPokeList);
+      return newPokeList;
+    }
+  }
+
+  function findPokemon() {
+    pokemonList.forEach(addListItem);
+    let container = document.getElementById('poke-list');
+
+    document.getElementById('search-bar').addEventListener('input', (event) => {
+      container.innerHTML = '';
+      console.log(event.target.value);
+      let filteredList = filterSearch(event.target.value);
+      filteredList.forEach(addListItem);
+    });
+  }
+
   // loads pokemon content to modal
   function showModal(pokemon) {
     let modalBody = $('.modal-body');
@@ -91,16 +114,6 @@ let pokemonRepository = (function () {
     });
   }
 
-
-
-  document.getElementById('search-bar').addEventListener('input', (event) => {
-    console.log(event.target.value);
-    // if (pokemonList.filter(pokemon => pokemon.name.split().includes(this.value))) {
-    //   console.log('true');
-    // listItem.addClass('is-hidden');
-    // }
-  })
-
   /**
     * Fetches the full list of Pokemon from the pokeAPI, then creates a pokemon object
     *  for each one and calls add on it.
@@ -151,12 +164,11 @@ let pokemonRepository = (function () {
     getAll: getAll,
     addListItem: addListItem,
     loadList: loadList,
-    loadDetails: loadDetails
+    loadDetails: loadDetails,
+    findPokemon: findPokemon
   };
 })();
 
 pokemonRepository.loadList().then(function () {
-  pokemonRepository.getAll().forEach(function (pokemon) {
-    pokemonRepository.addListItem(pokemon);
-  });
+  pokemonRepository.findPokemon()
 });
